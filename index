@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bacalar 10th Anniversary Getaway</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #eef7f6;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #2c3e50;
+    }
+    .wrapper {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+    .envelope-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 105, 128, 0.15);
+      border: 1px solid #d0e8e6;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.5s ease;
+    }
+    .envelope-header {
+      background: linear-gradient(135deg, #008080, #20b2aa);
+      color: #ffffff;
+      padding: 30px 20px;
+      cursor: pointer;
+      position: relative;
+    }
+    .envelope-header h1 {
+      font-size: 22px;
+      font-weight: normal;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .envelope-header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .seal-button {
+      width: 50px;
+      height: 50px;
+      background: #e0f2f1;
+      border: 2px solid #008080;
+      border-radius: 50%;
+      color: #008080;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 15px auto 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .envelope-header:hover .seal-button {
+      transform: scale(1.1);
+    }
+    .letter-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.8s ease-in-out, padding 0.5s ease;
+      background: #fafcfc;
+      text-align: left;
+      padding: 0 30px;
+    }
+    .letter-body.open {
+      max-height: 2000px;
+      padding: 30px;
+    }
+    .day-block {
+      margin-bottom: 24px;
+      border-bottom: 1px dashed #b2dfdb;
+      padding-bottom: 16px;
+    }
+    .day-block:last-child {
+      border-bottom: none;
+    }
+    .day-title {
+      font-size: 16px;
+      color: #006666;
+      font-weight: bold;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .day-block ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .day-block li {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #37474f;
+      position: relative;
+      padding-left: 18px;
+    }
+    .day-block li::before {
+      content: "•";
+      color: #20b2aa;
+      font-size: 16px;
+      position: absolute;
+      left: 0;
+      top: -1px;
+    }
+    .download-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 28px;
+      background-color: #008080;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 128, 128, 0.2);
+      transition: background-color 0.3s ease;
+    }
+    .download-btn:hover {
+      background-color: #005959;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="envelope-card">
+    <div class="envelope-header" onclick="toggleEnvelope()">
+      <h1>Bacalar 10th Anniversary Getaway</h1>
+      <p>Nalha Hotel Boutique y Villas — October 12–15</p>
+      <div class="seal-button" id="sealText">10</div>
+    </div>
+    
+    <div class="letter-body" id="letterBody">
+      <div id="itineraryContent">
+        <div class="day-block">
+          <div class="day-title">Day 1: Arrival</div>
+          <ul>
+            <li>Border crossing & drive to Bacalar</li>
+            <li>Check-in at Nalha Hotel Boutique y Villas</li>
+            <li>Sunset stroll & drinks on private dock</li>
+            <li>Dinner: La Playita</li>
+          </ul>
+        </div>
+
+        <div class="day-block">
+          <div class="day-title">Day 2: Anniversary Celebration (October 13)</div>
+          <ul>
+            <li>In-room breakfast</li>
+            <li>Morning lagoon kayak & paddleboarding</li>
+            <li>Poolside relaxation & optional couples massage</li>
+            <li>Anniversary Dinner: Nixtamal</li>
+          </ul>
+        </div>
+
+        <div class="day-block">
+          <div class="day-title">Day 3: Lagoon Adventure</div>
+          <ul>
+            <li>Morning at resort</li>
+            <li>Private lagoon boat tour (Pirates' Channel & Cenotes)</li>
+            <li>Lunch: La Burguesía del Pueblo</li>
+            <li>Evening unwind</li>
+            <li>Dinner: Finisterre</li>
+          </ul>
+        </div>
+
+        <div class="day-block">
+          <div class="day-title">Day 4: Departure</div>
+          <ul>
+            <li>Resort morning coffee</li>
+            <li>Check-out & drive back to Belize</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="download-btn" onclick="downloadPDF()">Download as PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleEnvelope() {
+    const letter = document.getElementById('letterBody');
+    const seal = document.getElementById('sealText');
+    if (letter.classList.contains('open')) {
+      letter.classList.remove('open');
+      seal.innerText = '10';
+    } else {
+      letter.classList.add('open');
+      seal.innerText = '✓';
+    }
+  }
+
+  function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFont("serif");
+    doc.setFontSize(18);
+    doc.setTextColor(0, 102, 102);
+    doc.text("Bacalar 10th Anniversary Getaway", 20, 20);
+
+    doc.setFontSize(11);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Nalha Hotel Boutique y Villas — October 12–15", 20, 28);
+    doc.line(20, 32, 190, 32);
+
+    let y = 42;
+
+    const days = [
+      {
+        title: "Day 1: Arrival",
+        items: [
+          "Border crossing & drive to Bacalar",
+          "Check-in at Nalha Hotel Boutique y Villas",
+          "Sunset stroll & drinks on private dock",
+          "Dinner: La Playita"
+        ]
+      },
+      {
+        title: "Day 2: Anniversary Celebration (October 13)",
+        items: [
+          "In-room breakfast",
+          "Morning lagoon kayak & paddleboarding",
+          "Poolside relaxation & optional couples massage",
+          "Anniversary Dinner: Nixtamal"
+        ]
+      },
+      {
+        title: "Day 3: Lagoon Adventure",
+        items: [
+          "Morning at resort",
+          "Private lagoon boat tour (Pirates' Channel & Cenotes)",
+          "Lunch: La Burguesía del Pueblo",
+          "Evening unwind",
+          "Dinner: Finisterre"
+        ]
+      },
+      {
+        title: "Day 4: Departure",
+        items: [
+          "Resort morning coffee",
+          "Check-out & drive back to Belize"
+        ]
+      }
+    ];
+
+    days.forEach(day => {
+      doc.setFontSize(13);
+      doc.setFont("serif", "bold");
+      doc.setTextColor(0, 102, 102);
+      doc.text(day.title, 20, y);
+      y += 7;
+
+      doc.setFontSize(10);
+      doc.setFont("serif", "normal");
+      doc.setTextColor(50, 50, 50);
+
+      day.items.forEach(item => {
+        doc.text("• " + item, 25, y);
+        y += 6;
+      });
+
+      y += 6;
+    });
+
+    doc.save("Bacalar_Anniversary_Itinerary.pdf");
+  }
+</script>
+
+</body>
+</html>
